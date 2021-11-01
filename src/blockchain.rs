@@ -105,8 +105,9 @@ impl Chain {
         block.transaction.append(&mut self.curr_trans);
         block.count = block.transaction.len() as u32;
         block.header.merkle = Chain::get_merkle(block.transaction.clone());
+        Chain::proof_of_work(&mut block.header);
 
-        println!("{:?}", &block);
+        println!("{:#?}", &block);
         self.chain.push(block);
 
         true
